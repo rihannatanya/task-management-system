@@ -1,11 +1,14 @@
-from validation import validate_task_title, validate_task_id
+try:
+    from task_manager.validation import validate_task_title, validate_task_id
+except ModuleNotFoundError:
+    from validation import validate_task_title, validate_task_id
 
 tasks = []
 
 
 def add_task(title):
     """
-    Adds a new task dictionary to the global tasks list if the title is valid.
+    Adds a new task dictionary to the global tasks list.
     """
     if validate_task_title(title):
         task = {
@@ -13,7 +16,7 @@ def add_task(title):
             "completed": False
         }
         tasks.append(task)
-        print("Task added successfully")
+        print("Task added successfully!")
         return True
     else:
         print("Invalid task title")
@@ -52,7 +55,7 @@ def track_progress():
     Calculates and displays current completion progress.
     """
     if len(tasks) == 0:
-        print("No tasks available")
+        print("No working currently")
         return
 
     completed_count = sum(1 for t in tasks if t["completed"])

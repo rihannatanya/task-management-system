@@ -11,12 +11,12 @@ def validate_task_title(title):
 
 def validate_task_id(task_id, tasks):
     """
-    Validates that the task_id is a valid integer index within the tasks list.
+    Validates that task_id is a valid integer index within tasks list.
     """
     try:
         idx = int(task_id)
         if 0 <= idx < len(tasks):
             return True
         return False
-    except (ValueError, TypeError):
+    except ValueError:
         return False
