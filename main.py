@@ -6,7 +6,10 @@ except ModuleNotFoundError:
 
 def main():
     while True:
-        choice = input().strip()
+        try:
+            choice = input().strip()
+        except EOFError:
+            break
 
         if choice == '1':
             title = input()

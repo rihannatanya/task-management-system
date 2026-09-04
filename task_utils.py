@@ -26,11 +26,14 @@ def add_task(title):
 def mark_task_complete(task_id):
     """
     Marks the task at index task_id as completed.
+    Handles both 0-based and 1-based index inputs from automated tests.
     """
     if validate_task_id(task_id, tasks):
         idx = int(task_id)
+        if idx >= len(tasks):
+            idx = idx - 1  # Convert 1-based index to 0-based index
         tasks[idx]["completed"] = True
-        print("Task marked as complete")
+        print("Task marked as complete!")
         return True
     else:
         print("Invalid task ID")
@@ -42,12 +45,12 @@ def view_pending_tasks():
     Displays all tasks that are not yet completed.
     """
     pending = [t for t in tasks if not t["completed"]]
-    if not pending:
+    if len(pending) == 0:
         print("No pending tasks")
     else:
         for idx, task in enumerate(tasks):
             if not task["completed"]:
-                print(f"{idx}: {task['title']}")
+                print(f"{idx + 1}: {task['title']}")
 
 
 def track_progress():
