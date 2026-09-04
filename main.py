@@ -1,7 +1,7 @@
 try:
-    from task_manager.task_utils import add_task, mark_task_complete, view_pending_tasks, track_progress, tasks
+    from task_manager.task_utils import add_task, mark_task_complete, view_pending_tasks, track_progress, calculate_progress, tasks
 except ModuleNotFoundError:
-    from task_utils import add_task, mark_task_complete, view_pending_tasks, track_progress, tasks
+    from task_utils import add_task, mark_task_complete, view_pending_tasks, track_progress, calculate_progress, tasks
 
 
 def main():

@@ -1,6 +1,6 @@
 def validate_task_title(title):
     """
-    Validates that the task title is a non-empty string using len().
+    Validates that the task title is a non-empty string.
     """
     if not isinstance(title, str):
         return False

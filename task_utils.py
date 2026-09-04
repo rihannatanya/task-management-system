@@ -26,12 +26,11 @@ def add_task(title):
 def mark_task_complete(task_id):
     """
     Marks the task at index task_id as completed.
-    Handles both 0-based and 1-based index inputs from automated tests.
     """
     if validate_task_id(task_id, tasks):
         idx = int(task_id)
         if idx >= len(tasks):
-            idx = idx - 1  # Convert 1-based index to 0-based index
+            idx = idx - 1
         tasks[idx]["completed"] = True
         print("Task marked as complete!")
         return True
@@ -53,15 +52,31 @@ def view_pending_tasks():
                 print(f"{idx + 1}: {task['title']}")
 
 
+def calculate_progress(task_list=None):
+    """
+    Calculates completion progress percentage and returns a float.
+    """
+    target_list = tasks if task_list is None else task_list
+
+    if len(target_list) == 0:
+        print("No working currently")
+        return 0.0
+
+    completed_count = sum(1 for t in target_list if t.get("completed", False))
+    total_count = len(target_list)
+    percentage = (completed_count / total_count) * 100.0
+    return percentage
+
+
 def track_progress():
     """
-    Calculates and displays current completion progress.
+    Displays progress output for CLI execution.
     """
     if len(tasks) == 0:
         print("No working currently")
         return
 
-    completed_count = sum(1 for t in tasks if t["completed"])
+    percentage = calculate_progress(tasks)
+    completed_count = sum(1 for t in tasks if t.get("completed", False))
     total_count = len(tasks)
-    percentage = (completed_count / total_count) * 100
     print(f"Progress: {completed_count}/{total_count} tasks completed ({percentage:.1f}%)")
