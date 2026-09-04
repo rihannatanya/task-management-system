@@ -1,8 +1,10 @@
 def validate_task_title(title):
     """
-    Validates that the task title is a non-empty string.
+    Validates that the task title is a non-empty string using len().
     """
     if not isinstance(title, str):
+        return False
+    if len(title) == 0:
         return False
     if len(title.strip()) == 0:
         return False
@@ -11,7 +13,7 @@ def validate_task_title(title):
 
 def validate_task_id(task_id, tasks):
     """
-    Validates that task_id is a valid integer index within tasks list.
+    Validates task_id as an integer within range, raising ValueError if invalid.
     """
     if len(tasks) == 0:
         return False
@@ -22,4 +24,4 @@ def validate_task_id(task_id, tasks):
             return True
         return False
     except ValueError:
-        return False
+        raise ValueError("Invalid task ID")
